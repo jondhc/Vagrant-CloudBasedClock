@@ -2,10 +2,8 @@ import http.server
 import socketserver
 import datetime
 import json
+PORT = 80
 
-PORT = 8000
-
-#Handler = http.server.SimpleHTTPRequestHandler
 class myHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         now = datetime.datetime.today()
@@ -16,7 +14,6 @@ class myHandler(http.server.BaseHTTPRequestHandler):
         formattedtime = servertime.strftime("%H:%M:%S")
         self.wfile.write(bytes(formattedtime, "utf-8"))
         return
-
 
 with socketserver.TCPServer(("", PORT), myHandler) as httpd:
     print("Serving at port ", PORT)
